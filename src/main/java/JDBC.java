@@ -16,12 +16,12 @@ public class JDBC {
 
 //    static final MetricRegistry metrics = new MetricRegistry();
 
-    public static void main(String[] args) throws SQLException{
+    public static void main(String[] args){
 
         JDBCMetrics jm = JDBCMetrics.getInstance();
         MetricRegistry metrics = jm.getRegistry();
 
-//        final Meter requests = metrics.meter("requests");
+        final Meter requests = metrics.meter("requests");
         final ConsoleReporter reporter = ConsoleReporter.forRegistry(metrics)
                 .convertRatesTo(TimeUnit.SECONDS)
                 .convertDurationsTo(TimeUnit.MILLISECONDS)
@@ -30,7 +30,7 @@ public class JDBC {
         reporter.start(1, TimeUnit.SECONDS);
 
 
-        Connection conn = null;
+        Connection conn ;
         Statement stmt = null;
 
         try{
